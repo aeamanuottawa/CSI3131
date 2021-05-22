@@ -1,3 +1,8 @@
+/********************************************************
+ * An example source module to accompany...
+ *
+ * Amir Eaman
+ */
 package Demo;
 
 public class Demo2 {
@@ -21,11 +26,9 @@ public class Demo2 {
 				
 	};
 	Thread thread4 = new Thread()
-	{
-		
+	{		
 		public void run()
-		{
-			
+		{			
 			System.out.println("3");
 			try {
 				Thread.sleep(1000);
@@ -33,8 +36,7 @@ public class Demo2 {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("4");
-			
+			System.out.println("4");			
 		}
 				
 	};

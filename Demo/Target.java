@@ -1,3 +1,8 @@
+/********************************************************
+ * An example source module to accompany...
+ *
+ * Amir Eaman
+ */
 package Demo;
 
 
@@ -15,8 +20,5 @@ public class Target {
         i++;
 		System.out.println("This thread ID is " + Thread.currentThread().getId());
 	 	System.out.println(i);}
-	 	
-	
-	
-	
+	 		
 }

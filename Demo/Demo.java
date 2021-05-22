@@ -1,3 +1,8 @@
+/********************************************************
+ * An example source module to accompany...
+ *
+ * Amir Eaman
+ */
 package Demo;
 
 import java.util.concurrent.*;
@@ -26,13 +31,9 @@ public class Demo implements Runnable{ // extends Thread
 		 
 		 thread1.start(); // Thread one
 		 thread2.start(); // Thread two
-		 
-		 
+		 		 
 		  System.out.println( "The main thread ID is "+Thread.currentThread().getId());
-		  
-		
-		
+		  	
 	}
-
 
 	}

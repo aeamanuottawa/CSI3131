@@ -1,4 +1,9 @@
-package Demo;
+
+/********************************************************
+ * An example source module to accompany...
+ *
+ * Amir Eaman
+ */package Demo;
 
 
 
@@ -8,20 +13,17 @@ public class Target2 {
 	int i;
 	public  void a() 
 	{ 		
-		
-				
+						
         i++;
 		 System.out.println("This thread ID is " + Thread.currentThread().getId());
 	 	System.out.println(i);
 	    tl.set(Thread.currentThread().getId()); 	
-	    b();
-	
+	    b();	
 	}
 	
 	public  void b() 
 	{ 		
 		System.out.println("The value inside Threadlocal for this thread is: " + tl.get());
-	
 	}
 	
 	public static void main(String[] args){
@@ -32,25 +34,20 @@ public class Target2 {
 			
 			public void run()
 			{
-				tg2.a();
-				
+				tg2.a();				
 			}
 					
 		};
 		
 		Thread threadS = new Thread()
-		{
-			
+		{		
 			public void run()
 			{
-				tg2.a();
-				
-			}
-					
+				tg2.a();				
+			}					
 		};
 		threadF.start();
-		threadS.start();
-		
+		threadS.start();		
 	}
 	
 }
