@@ -16,9 +16,10 @@ public class Target {
 		 * (InterruptedException e) { // TODO Auto-generated catch block
 		 * e.printStackTrace(); } System.out.println("part2");
 		 */
-	 	
+	 //	synchronized(this) {
         i++;
 		System.out.println("This thread ID is " + Thread.currentThread().getId());
 	 	System.out.println(i);}
+	// }
 	 		
 }
