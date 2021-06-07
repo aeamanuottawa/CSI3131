@@ -1,7 +1,6 @@
 
 package Demo;
 
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 class MonitorDemo extends Thread{
