@@ -4,39 +4,44 @@ package Demo;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class MonitorDemo {
-    private boolean mailDelivered = false;
-    public static Lock lock = new ReentrantLock ();
+class MonitorDemo extends Thread{
+    private  boolean mailDelivered = false;
+    private final static ReentrantLock lock = new ReentrantLock();
 
     public void checkMailbox(){
         synchronized(lock){
+        	
             while(! mailDelivered){
                 try { 
-                	  System.out.format("%s is waiting to read their mail. \n",Thread.currentThread().getName());
+                	  System.out.format("%s is waiting for their mail. \n",Thread.currentThread().getName());
                 lock.wait();
+              
             } catch (InterruptedException e)  {
                 System.out.println("Something bad happened!"); }
             }
 		  System.out.format("%s is reading their mail \n",Thread.currentThread().getName());
-        }
-      
+		
+        }     
     }
 
     public void postMan(){
         synchronized(lock){
-        	 System.out.println("Hello from postman!");
+    
+        	 System.out.format("Hello from %s, I have some mails!! \n",Thread.currentThread().getName());
              this.mailDelivered = true;
+            
              lock.notifyAll();
-        }
+      }
     }
 	
 	  public static void main(String args[]) {   
-		  new Thread( () -> { new MonitorDemo().postMan(); }, "postMan").start();
-    	new Thread( () -> { new MonitorDemo().checkMailbox(); }, "Tenant 1").start();
-    	new Thread( () -> { new MonitorDemo().checkMailbox(); }, "Tenant 2").start();
-		new Thread( () -> { new MonitorDemo().postMan(); }, "postMan").start();
-		new Thread( () -> { new MonitorDemo().postMan(); }, "Tenant 3").start();
-	
+		  MonitorDemo md = new MonitorDemo();
+		// new Thread( () -> { md.postMan(); }, "postMan1").start();
+    	new Thread( () -> { md.checkMailbox(); }, "Tenant1").start();
+    	new Thread( () -> { md.checkMailbox(); }, "Tenant2").start();
+    	  try { Thread.sleep(3000); } catch(Exception e) {}
+		new Thread( () -> { md.postMan(); }, "postMan2").start();
+
 	  }
 	
 }
