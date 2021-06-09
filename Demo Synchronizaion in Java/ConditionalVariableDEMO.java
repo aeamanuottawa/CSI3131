@@ -5,10 +5,10 @@ import java.util.concurrent.locks.*;
 class WaterTank extends Thread {
 	
 	    private static Lock WaterTankLock = new ReentrantLock();
-	    private static int watertankSafetylevel = 90;
+
 	    private static int watertanklevel=0;
 	    private static Condition empty = WaterTankLock.newCondition();
-	    private static Condition full = WaterTankLock.newCondition();
+
   
 	    public static void useWaterTank() {
 	     	WaterTankLock.lock();
@@ -19,8 +19,8 @@ class WaterTank extends Thread {
                         }
         	
         	watertanklevel -=40;
-        	System.out.format("Thirsty person %s is drinking water -20. Now Left  %d \n", Thread.currentThread().getName(), watertanklevel);
-        	full.signalAll();
+        	System.out.format("Thirsty person %s is drinking water -40. Now Left  %d \n", Thread.currentThread().getName(), watertanklevel);
+        
 	    }
         	catch (Exception e) {
                 e.printStackTrace();
@@ -33,21 +33,12 @@ class WaterTank extends Thread {
         	   
 	    public static void fillWaterTank() {
         	WaterTankLock.lock();
-           
-        	try { while ( watertanklevel > watertankSafetylevel) { 
-                System.out.format("Filler %s Sleeping, water level is greater than safety level \n", Thread.currentThread().getName());
-                full.await();} 
-        	
-        	
+            	
         	watertanklevel+=60;
-        	System.out.format("Refilled +40.. by Filler %s. The water level is %d \n" ,Thread.currentThread().getName(),watertanklevel);
-        	empty.signalAll();
-        	}
-        	catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-            WaterTankLock.unlock();          
-            }          
+        	System.out.format("Refilled +60.. by Filler %s. The water level is %d \n" ,Thread.currentThread().getName(),watertanklevel);
+        	empty.notifyAll();
+
+            WaterTankLock.unlock();                 
 	    }
 	}
 
