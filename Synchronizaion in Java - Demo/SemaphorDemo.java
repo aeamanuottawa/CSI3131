@@ -8,7 +8,6 @@ class SemaphorDemo extends Thread {
    {
 	  try {
 		 semaphor_order.acquire();//  semaphor
-		 System.out.print(semaphor_order);
 			System.out.format("My name is  %s \n" ,Thread.currentThread().getName());
           System.out.print("A ");
           Thread.sleep(2000);
@@ -23,7 +22,7 @@ class SemaphorDemo extends Thread {
   {
 	  try {
 	    semaphor_order.acquire();
-	    System.out.print(semaphor_order);
+
 		//  System.out.format("My name is  %s \n" ,Thread.currentThread().getName());
          System.out.print("C ");
          Thread.sleep(2000);
