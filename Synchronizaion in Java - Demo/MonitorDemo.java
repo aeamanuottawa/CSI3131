@@ -1,5 +1,4 @@
-
-package Demo;
+package demo;
 
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -38,7 +37,7 @@ class MonitorDemo extends Thread{
 		// new Thread( () -> { md.postMan(); }, "postMan1").start();
     	new Thread( () -> { md.checkMailbox(); }, "Tenant1").start();
     	new Thread( () -> { md.checkMailbox(); }, "Tenant2").start();
-    	  try { Thread.sleep(3000); } catch(Exception e) {}
+    	try { Thread.sleep(3000); } catch(Exception e) {}
 		new Thread( () -> { md.postMan(); }, "postMan2").start();
 
 	  }

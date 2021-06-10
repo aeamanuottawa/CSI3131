@@ -1,11 +1,10 @@
-package Demo;
+package demo;
 
 import java.util.concurrent.locks.*;
 
 class WaterTank extends Thread {
 	
 	    private static Lock WaterTankLock = new ReentrantLock();
-
 	    private static int watertanklevel=0;
 	    private static Condition empty = WaterTankLock.newCondition();
 
@@ -14,12 +13,12 @@ class WaterTank extends Thread {
 	     	WaterTankLock.lock();
         	try { while ( watertanklevel < 40) 
         	         { 
-                 System.out.format("Thirsty Person %s is still thirsty... waiting by putting the water tank lock back.\n", Thread.currentThread().getName());
+                 System.out.format("Thirsty %s is still thirsty... waiting by putting the water tank lock back.\n", Thread.currentThread().getName());
                  empty.await();
                         }
         	
         	watertanklevel -=40;
-        	System.out.format("Thirsty person %s is drinking water -40. Now Left  %d \n", Thread.currentThread().getName(), watertanklevel);
+        	System.out.format("Thirsty %s is drinking water -40. Now Left  %d \n", Thread.currentThread().getName(), watertanklevel);
         
 	    }
         	catch (Exception e) {
@@ -36,7 +35,7 @@ class WaterTank extends Thread {
             	
         	watertanklevel+=60;
         	System.out.format("Refilled +60.. by Filler %s. The water level is %d \n" ,Thread.currentThread().getName(),watertanklevel);
-        	empty.notifyAll();
+        	empty.signalAll();
 
             WaterTankLock.unlock();                 
 	    }
